@@ -6,6 +6,7 @@ export default class GradientGenerator extends Component{
         super(props);
 
     this.state = {
+        angle: 0,
         color1: "#009900",
         breakpoint1: 0,
         color2: "#633D35",
@@ -19,33 +20,44 @@ export default class GradientGenerator extends Component{
         const gradient = {
             width: "60%",
             height: "100px",
-            background: `linear-gradient(${this.state.color1} ${this.state.breakpoint1}%,${this.state.color2} ${this.state.breakpoint2}% ,${this.state.color3} ${this.state.breakpoint3}%)`
+            background: `linear-gradient(${this.state.angle}deg, ${this.state.color1} ${this.state.breakpoint1}%,${this.state.color2} ${this.state.breakpoint2}% ,${this.state.color3} ${this.state.breakpoint3}%)`
           };
     console.log(this.state)
         return(
             <div>
+                    Angle : 
+                    <input value={this.state.angle} onChange={this.getAngle} type="range" min="0" max="360"></input>
+                    <span>{this.state.angle}</span>
+                    <br/>
+                    color 1
                     <input type="color" id="col1" name="col1" value={this.state.color1} onChange={this.getFirstValue}/>
-                    <label htmlFor="col1">color 1</label>
+                    Breakpoint1
                     <input value={this.state.breakpoint1} onChange={this.getFirstBP} type="range" min="0" max="100"></input>
                     <span>{this.state.breakpoint1}</span>
-
+                    <br/>
+                    color 2
                     <input type="color" id="col2" name="col2" value={this.state.color2} onChange={this.getSndValue}/>
-                    <label htmlFor="col2">color 2</label>
+                    Breakpoint2
                     <input value={this.state.breakpoint2} onChange={this.getSndBP} type="range" min="0" max="100"></input>
                     <span>{this.state.breakpoint2}</span>
-
+                    <br/>   
+                    color 3
                     <input type="color" id="col3" name="col3" value={this.state.color3} onChange={this.getThrdValue}/>
-                    <label htmlFor="col2">color 3</label>
+                    Breakpoint3
                     <input value={this.state.breakpoint3} onChange={this.getThrdtBP} type="range" min="0" max="100"></input>
                     <span>{this.state.breakpoint3}</span>
 
                     <div style={gradient} />
 
-                    <span> background: linear-gradient({this.state.color1} {this.state.breakpoint1}%,{this.state.color2} {this.state.breakpoint2}%,{this.state.color3} {this.state.breakpoint3}%)</span>
+                    <span> background: linear-gradient({this.state.angle}deg, {this.state.color1} {this.state.breakpoint1}%,{this.state.color2} {this.state.breakpoint2}%,{this.state.color3} {this.state.breakpoint3}%)</span>
             </div>
         )
      }
 
+     getAngle = (e) => {
+        this.setState({angle: e.target.value});
+    }
+     
      getFirstValue = (e) => {
         this.setState({color1: e.target.value});
     }
